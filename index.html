@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Engineers Without Borders · UMBC Chapter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a3a5c;
+      --navy-dark: #0f2540;
+      --green: #2d7a3a;
+      --green-light: #e8f5ea;
+      --green-dark: #1f5929;
+      --gold: #fdb515;
+      --gold-dark: #d99a0a;
+      --gold-light: #fff8e1;
+      --off-white: #f7f8f9;
+      --text: #1a1a1a;
+      --text-muted: #5a6472;
+      --border: rgba(0,0,0,0.09);
+      --font-display: 'Archivo Black', sans-serif;
+      --font-body: 'Archivo', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--text); background: #fff; }
+
+    /* NAV */
+    nav {
+      background: var(--navy-dark);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 60px; position: sticky; top: 0; z-index: 100;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-badge {
+      background: var(--gold); color: var(--navy-dark);
+      font-family: var(--font-display); font-size: 11px;
+      letter-spacing: 0.03em; padding: 4px 9px; border-radius: 4px; line-height: 1;
+    }
+    .nav-name { color: rgba(255,255,255,0.8); font-size: 13px; font-weight: 500; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+    .nav-links a {
+      color: rgba(255,255,255,0.6); text-decoration: none; font-size: 12px;
+      font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta { background: var(--green) !important; color: #fff !important; padding: 7px 16px; border-radius: 4px; }
+    .nav-cta:hover { background: var(--green-dark) !important; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: #fff; margin: 5px 0; border-radius: 2px; transition: 0.3s; }
+
+    /* HERO */
+    .hero {
+      background: var(--navy); color: #fff;
+      padding: 4.5rem 2rem 4rem; position: relative; overflow: hidden;
+    }
+    .hero-top-bar {
+      position: absolute; top: 0; left: 0; right: 0; height: 5px;
+      background: linear-gradient(90deg, var(--gold) 40%, var(--green) 40%);
+    }
+    .hero-bg-shape {
+      position: absolute; right: -80px; top: -40px; width: 420px; height: 420px;
+      border-radius: 50%; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+    }
+    .hero-bg-shape2 {
+      position: absolute; right: 60px; bottom: -100px; width: 280px; height: 280px;
+      border-radius: 50%; background: rgba(45,122,58,0.06); border: 1px solid rgba(45,122,58,0.1);
+    }
+    .hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(253,181,21,0.1); border: 1px solid rgba(253,181,21,0.25);
+      color: #f5cc65; font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 5px 12px; border-radius: 20px; margin-bottom: 1.25rem;
+    }
+    .hero-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+    .hero-org { font-family: var(--font-display); line-height: 0.95; margin-bottom: 1.25rem; }
+    .hero-org-line1 { display: block; font-size: clamp(2.8rem, 8vw, 5.5rem); color: #fff; letter-spacing: -0.03em; }
+    .hero-org-line2 { display: block; font-size: clamp(2.8rem, 8vw, 5.5rem); color: #fff; letter-spacing: -0.03em; }
+    .hero-org-line3 { display: block; font-size: clamp(1.4rem, 3.5vw, 2.4rem); color: var(--gold); letter-spacing: 0.01em; margin-top: 0.25rem; }
+    .hero-sub { font-size: 1rem; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 520px; margin-bottom: 2rem; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-green {
+      background: var(--green); color: #fff; font-family: var(--font-display);
+      font-size: 13px; padding: 12px 24px; border-radius: 4px; text-decoration: none; transition: background 0.2s;
+    }
+    .btn-green:hover { background: var(--green-dark); }
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.2); color: #fff; font-weight: 600;
+      font-size: 13px; padding: 12px 24px; border-radius: 4px; text-decoration: none; transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.5); }
+    .hero-stats { display: flex; gap: 2.5rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; }
+    .stat-num { font-family: var(--font-display); font-size: 2rem; color: var(--gold); line-height: 1; letter-spacing: -0.02em; }
+    .stat-label { font-size: 11px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; font-weight: 600; }
+
+    /* SECTIONS */
+    section { padding: 4rem 2rem; }
+    .section-inner { max-width: 860px; margin: 0 auto; }
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); margin-bottom: 0.5rem; }
+    .section-title { font-family: var(--font-display); font-size: clamp(1.7rem, 3.5vw, 2.4rem); line-height: 1.08; margin-bottom: 1rem; color: var(--text); letter-spacing: -0.02em; }
+    .section-body { font-size: 1rem; color: var(--text-muted); line-height: 1.7; max-width: 600px; }
+
+    /* ABOUT */
+    .about-section { background: #fff; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2.5rem; align-items: start; }
+    .values-list { list-style: none; margin-top: 1rem; }
+    .values-list li { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+    .values-list li:last-child { border-bottom: none; }
+    .val-icon { width: 20px; height: 20px; border-radius: 3px; background: var(--green-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .val-icon svg { width: 11px; height: 11px; fill: var(--green); }
+    .val-name { font-weight: 600; color: var(--text); }
+    .goals-card { background: var(--navy); color: #fff; border-radius: 8px; padding: 1.75rem; border-top: 4px solid var(--gold); }
+    .goals-card h3 { font-family: var(--font-display); font-size: 1.15rem; margin-bottom: 1rem; color: var(--gold); letter-spacing: -0.01em; }
+    .goal-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 0.75rem; font-size: 0.9rem; line-height: 1.5; color: rgba(255,255,255,0.78); }
+    .goal-num { font-family: var(--font-display); font-size: 1rem; color: #6ecf7c; min-width: 24px; line-height: 1.4; }
+
+    /* PROJECTS */
+    .projects-section { background: var(--off-white); }
+    .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+    .project-card { background: #fff; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
+    .project-banner { height: 6px; }
+    .project-card-body { padding: 1.25rem; }
+    .project-tag { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; background: var(--green-light); color: var(--green-dark); padding: 3px 8px; border-radius: 3px; margin-bottom: 0.75rem; }
+    .project-card h3 { font-family: var(--font-display); font-size: 1.05rem; margin-bottom: 0.4rem; line-height: 1.2; color: var(--navy); letter-spacing: -0.01em; }
+    .project-meta { font-size: 12px; color: var(--text-muted); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 6px; }
+    .project-meta-dot { width: 3px; height: 3px; background: var(--text-muted); border-radius: 50%; }
+    .project-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* GET INVOLVED */
+    .involved-section { background: #fff; }
+    .involved-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2rem; }
+    .involve-card { border: 1px solid var(--border); border-top: 3px solid var(--gold); border-radius: 8px; padding: 1.25rem; }
+    .involve-icon { width: 40px; height: 40px; border-radius: 6px; margin-bottom: 0.75rem; display: flex; align-items: center; justify-content: center; }
+    .involve-icon svg { width: 20px; height: 20px; }
+    .involve-card h3 { font-family: var(--font-display); font-size: 0.9rem; margin-bottom: 0.4rem; color: var(--navy); letter-spacing: -0.01em; }
+    .involve-card p { font-size: 0.825rem; color: var(--text-muted); line-height: 1.5; }
+    .involve-link { display: inline-block; margin-top: 0.75rem; font-size: 12px; font-weight: 600; text-decoration: none; color: var(--green); letter-spacing: 0.03em; }
+    .involve-link:hover { color: var(--green-dark); }
+
+    /* CONTACT */
+    .contact-section { background: var(--navy-dark); color: #fff; }
+    .contact-section .section-label { color: var(--gold); }
+    .contact-section .section-title { color: #fff; }
+    .contact-section .section-body { color: rgba(255,255,255,0.5); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; align-items: start; }
+    .contact-info h3 { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1rem; }
+    .contact-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 0.875rem; text-decoration: none; color: rgba(255,255,255,0.7); transition: color 0.2s; }
+    .contact-item:hover { color: var(--gold); }
+    .contact-icon { width: 28px; height: 28px; border-radius: 5px; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-icon svg { width: 13px; height: 13px; fill: currentColor; }
+    .meeting-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 1.5rem; border-top: 3px solid var(--green); }
+    .meeting-card h3 { font-family: var(--font-display); font-size: 1.05rem; color: var(--gold); margin-bottom: 0.75rem; letter-spacing: -0.01em; }
+    .meeting-detail { font-size: 0.875rem; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 0.25rem; }
+    .meeting-detail strong { color: #fff; font-weight: 600; }
+    .btn-gold {
+      display: inline-block; margin-top: 1.25rem; background: var(--gold);
+      color: var(--navy-dark); font-family: var(--font-display); font-size: 12px;
+      padding: 10px 20px; border-radius: 4px; text-decoration: none; transition: background 0.2s;
+    }
+    .btn-gold:hover { background: var(--gold-dark); }
+
+    /* FOOTER */
+    footer { background: #080f1a; color: rgba(255,255,255,0.3); text-align: center; padding: 1.5rem; font-size: 12px; border-top: 1px solid rgba(255,255,255,0.05); }
+    footer a { color: var(--gold); text-decoration: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      .about-grid, .projects-grid, .contact-grid { grid-template-columns: 1fr; }
+      .involved-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; right: 0; background: var(--navy-dark); padding: 1rem 2rem 1.5rem; gap: 1rem; }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: block; }
+    }
+    @media (max-width: 480px) {
+      .involved-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">
+    <span class="nav-logo-badge">EWB · UMBC</span>
+  </a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Our Work</a></li>
+    <li><a href="#involved">Get Involved</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://www.classy.org" class="nav-cta" target="_blank">Donate</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-top-bar"></div>
+  <div class="hero-bg-shape"></div>
+  <div class="hero-bg-shape2"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><span class="hero-dot"></span>Baltimore, MD · Student Chapter</div>
+    <div class="hero-org">
+      <span class="hero-org-line1">Engineers</span>
+      <span class="hero-org-line2">Without Borders</span>
+      <span class="hero-org-line3">UMBC Chapter</span>
+    </div>
+    <p class="hero-sub">We partner with communities to design sustainable, community-driven solutions — while empowering UMBC students to grow as engineers and leaders.</p>
+    <div class="hero-actions">
+      <a href="#involved" class="btn-green">Get Involved</a>
+      <a href="#projects" class="btn-outline">View Our Work</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">2+</div><div class="stat-label">Completed Projects</div></div>
+      <div><div class="stat-num">Tue</div><div class="stat-label">Weekly Meetings</div></div>
+      <div><div class="stat-num">4</div><div class="stat-label">Core Goals</div></div>
+      <div><div class="stat-num">All</div><div class="stat-label">Majors Welcome</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="section-inner">
+    <div class="section-label">Who We Are</div>
+    <div class="section-title">More than engineering — it's lasting impact.</div>
+    <p class="section-body">Engineers Without Borders at UMBC is a student-led chapter dedicated to building sustainable solutions for disadvantaged communities while developing globally aware engineers and leaders.</p>
+    <div class="about-grid">
+      <div>
+        <div class="section-label" style="margin-bottom:0.75rem;">Our Values</div>
+        <ul class="values-list">
+          <li>
+            <span class="val-icon"><svg viewBox="0 0 12 12"><path d="M6 1a5 5 0 100 10A5 5 0 006 1zm-1 7.4l-2-2 .7-.7 1.3 1.3 2.7-2.7.7.7-3.4 3.4z"/></svg></span>
+            <div><span class="val-name">Community-centered thinking</span> — needs and voices of partners guide our work.</div>
+          </li>
+          <li>
+            <span class="val-icon"><svg viewBox="0 0 12 12"><path d="M6 1a5 5 0 100 10A5 5 0 006 1zm-1 7.4l-2-2 .7-.7 1.3 1.3 2.7-2.7.7.7-3.4 3.4z"/></svg></span>
+            <div><span class="val-name">Cultural humility</span> — learning from the communities we serve.</div>
+          </li>
+          <li>
+            <span class="val-icon"><svg viewBox="0 0 12 12"><path d="M6 1a5 5 0 100 10A5 5 0 006 1zm-1 7.4l-2-2 .7-.7 1.3 1.3 2.7-2.7.7.7-3.4 3.4z"/></svg></span>
+            <div><span class="val-name">Sustainability</span> — solutions that are environmentally responsible and long-lasting.</div>
+          </li>
+          <li>
+            <span class="val-icon"><svg viewBox="0 0 12 12"><path d="M6 1a5 5 0 100 10A5 5 0 006 1zm-1 7.4l-2-2 .7-.7 1.3 1.3 2.7-2.7.7.7-3.4 3.4z"/></svg></span>
+            <div><span class="val-name">Accountability</span> — taking ownership of our designs and their real-world impact.</div>
+          </li>
+          <li>
+            <span class="val-icon"><svg viewBox="0 0 12 12"><path d="M6 1a5 5 0 100 10A5 5 0 006 1zm-1 7.4l-2-2 .7-.7 1.3 1.3 2.7-2.7.7.7-3.4 3.4z"/></svg></span>
+            <div><span class="val-name">Growth and learning</span> — curiosity, reflection, and continuous improvement.</div>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="goals-card">
+          <h3>Our Four Goals</h3>
+          <div class="goal-item"><span class="goal-num">01</span><span>Improve quality of life for disadvantaged communities</span></div>
+          <div class="goal-item"><span class="goal-num">02</span><span>Advance economic and environmental sustainability</span></div>
+          <div class="goal-item"><span class="goal-num">03</span><span>Create opportunities for students to get involved</span></div>
+          <div class="goal-item"><span class="goal-num">04</span><span>Foster professional development for UMBC students</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects-section" id="projects">
+  <div class="section-inner">
+    <div class="section-label">Our Work</div>
+    <div class="section-title">Projects that move communities forward.</div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-banner" style="background: var(--gold);"></div>
+        <div class="project-card-body">
+          <span class="project-tag">Completed · 2023</span>
+          <h3>Habitat for Humanity Private Build</h3>
+          <div class="project-meta"><span>Havre de Grace, MD</span><span class="project-meta-dot"></span><span>May 6, 2023</span></div>
+          <p class="project-desc">EWB-UMBC partnered with Habitat for Humanity on a triplex build at 808 & 810 Erie St, helping three families move closer to homeownership.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-banner" style="background: var(--green);"></div>
+        <div class="project-card-body">
+          <span class="project-tag">Completed · 2024</span>
+          <h3>Wheelchair Accessibility Assessment</h3>
+          <div class="project-meta"><span>Philadelphia, PA</span><span class="project-meta-dot"></span><span>Oct 26, 2024</span></div>
+          <p class="project-desc">Students volunteered at Olney Baptist Church to take building measurements and assess wheelchair accessibility improvement options.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GET INVOLVED -->
+<section class="involved-section" id="involved">
+  <div class="section-inner">
+    <div class="section-label">Get Involved</div>
+    <div class="section-title">Open to all majors. No experience needed.</div>
+    <p class="section-body">Whether you're an engineering student or not, there's a place for you at EWB-UMBC. We meet weekly and welcome anyone committed to making an impact.</p>
+    <div class="involved-grid">
+      <div class="involve-card">
+        <div class="involve-icon" style="background: var(--green-light);">
+          <svg viewBox="0 0 20 20" fill="#2d7a3a"><path d="M10 2a4 4 0 100 8 4 4 0 000-8zm-7 14a7 7 0 1114 0H3z"/></svg>
+        </div>
+        <h3>Weekly Meetings</h3>
+        <p>Every Tuesday, 12–1pm in Sondheim 109. Open to all UMBC students.</p>
+        <a href="https://calendar.google.com/calendar/u/0?cid=Y19jMWFhZWUwMzk2ZTdiMzM5OWQ1NmZjMTc3ZTIzZDc0MTc1MzE3NjQ1Njk5YWIwOThmY2EwZGFlMjIyODdkYzlhQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20" class="involve-link" target="_blank">View Calendar →</a>
+      </div>
+      <div class="involve-card">
+        <div class="involve-icon" style="background: var(--gold-light);">
+          <svg viewBox="0 0 20 20" fill="#a07010"><path d="M9 2a7 7 0 100 14A7 7 0 009 2zm1 10H8V8h2v4zm0-6H8V4h2v2z"/></svg>
+        </div>
+        <h3>Interest Form</h3>
+        <p>Fill out our interest form and we'll reach out with more info on how to get plugged in.</p>
+        <a href="#" class="involve-link">Fill Out Form →</a>
+      </div>
+      <div class="involve-card">
+        <div class="involve-icon" style="background: var(--green-light);">
+          <svg viewBox="0 0 20 20" fill="#2d7a3a"><path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm2 0v.01L10 11l6-5.99V5H4zm0 2.24V13h12V7.24l-6 5.99-6-5.99z"/></svg>
+        </div>
+        <h3>Stay Connected</h3>
+        <p>Follow us on Instagram and join our Discord for announcements and updates.</p>
+        <a href="https://www.instagram.com/ewb.umbc/" class="involve-link" target="_blank">@ewb.umbc →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-inner">
+    <div class="section-label">Contact</div>
+    <div class="section-title">Come build something that matters.</div>
+    <p class="section-body">Reach us through social media, Discord, or through our faculty advisor. We'd love to hear from you.</p>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Connect With Us</h3>
+        <a class="contact-item" href="https://www.instagram.com/ewb.umbc/" target="_blank">
+          <span class="contact-icon"><svg viewBox="0 0 16 16"><path d="M8 0C5.8 0 5.5 0 4.7.1 2 .2.2 2 .1 4.7 0 5.5 0 5.8 0 8s0 2.5.1 3.3C.2 14 2 15.8 4.7 15.9c.8.1 1.1.1 3.3.1s2.5 0 3.3-.1c2.7-.1 4.5-1.9 4.6-4.6.1-.8.1-1.1.1-3.3s0-2.5-.1-3.3C15.8 2 14 .2 11.3.1 10.5 0 10.2 0 8 0zm0 1.4c2.1 0 2.4 0 3.2.1 2 .1 3 1.1 3.1 3.1.1.8.1 1.1.1 3.2s0 2.4-.1 3.2c-.1 2-1.1 3-3.1 3.1-.8.1-1.1.1-3.2.1s-2.4 0-3.2-.1c-2-.1-3-1.1-3.1-3.1C1.6 10.4 1.6 10.1 1.6 8s0-2.4.1-3.2c.1-2 1.1-3 3.1-3.1C5.6 1.4 5.9 1.4 8 1.4zM8 4a4 4 0 100 8A4 4 0 008 4zm0 6.6a2.6 2.6 0 110-5.2 2.6 2.6 0 010 5.2zm4.2-6.8a.95.95 0 100-1.9.95.95 0 000 1.9z"/></svg></span>
+          Instagram · @ewb.umbc
+        </a>
+        <a class="contact-item" href="https://discord.gg/cg4sKGC" target="_blank">
+          <span class="contact-icon"><svg viewBox="0 0 16 16"><path d="M13.5 2.6C12.5 2.1 11.4 1.7 10.2 1.5l-.2.3c1.1.3 2 .7 2.9 1.3A9.6 9.6 0 008 2.5c-1.6 0-3.1.3-4.5.8-.3-.1-.4-.2-.5-.3-1.2.2-2.3.6-3.3 1.1C.1 7.1-.1 10 .5 12.8c1.3 1 2.6 1.6 3.8 2l.6-.9c-.7-.3-1.4-.6-2-.9l.4-.3c2.7 1.2 5.5 1.2 8.2 0l.4.3c-.6.3-1.3.6-2 .9l.6.9c1.2-.4 2.5-1 3.8-2 .7-3.1.4-6-.8-8.2zM5.3 11.2c-.7 0-1.3-.7-1.3-1.5s.6-1.5 1.3-1.5 1.4.7 1.3 1.5c0 .8-.6 1.5-1.3 1.5zm5.4 0c-.7 0-1.3-.7-1.3-1.5s.6-1.5 1.3-1.5 1.3.7 1.3 1.5-.6 1.5-1.3 1.5z"/></svg></span>
+          Discord · Join Server
+        </a>
+        <a class="contact-item" href="https://www.facebook.com/EWBatUMBC" target="_blank">
+          <span class="contact-icon"><svg viewBox="0 0 16 16"><path d="M16 8A8 8 0 100 8a8 8 0 0016 0zm-4.5-2h-1.5c-.3 0-.5.2-.5.5V8h2l-.3 2H9.5v5H7.5v-5H6V8h1.5V6.5C7.5 5.1 8.4 4 9.8 4H11.5v2z"/></svg></span>
+          Facebook · EWBatUMBC
+        </a>
+        <a class="contact-item" href="https://x.com/EWBatUMBC" target="_blank">
+          <span class="contact-icon"><svg viewBox="0 0 16 16"><path d="M12.6 0h2.5L9.7 6.8 16 16h-4.6l-3.8-5L3.1 16H.6l5.8-6.6L0 0h4.7l3.5 4.6L12.6 0zm-.9 14.4h1.4L4.4 1.4H2.9l8.8 13z"/></svg></span>
+          X (Twitter) · @EWBatUMBC
+        </a>
+        <a class="contact-item" href="mailto:blaney@umbc.edu">
+          <span class="contact-icon"><svg viewBox="0 0 16 16"><path d="M2 3a1 1 0 011-1h10a1 1 0 011 1v.5L8 8.5 2 3.5V3zm0 1.5l6 5 6-5V13a1 1 0 01-1 1H3a1 1 0 01-1-1V4.5z"/></svg></span>
+          Advisor: Dr. Lee Blaney
+        </a>
+      </div>
+      <div>
+        <div class="meeting-card">
+          <h3>Weekly Meetings</h3>
+          <p class="meeting-detail"><strong>Day:</strong> Every Tuesday</p>
+          <p class="meeting-detail"><strong>Time:</strong> 12:00 PM – 1:00 PM</p>
+          <p class="meeting-detail"><strong>Location:</strong> Sondheim 109, UMBC</p>
+          <p class="meeting-detail" style="margin-top:0.75rem;">Open to all students — no prior experience required. Come as you are.</p>
+          <a href="https://calendar.google.com/calendar/u/0?cid=Y19jMWFhZWUwMzk2ZTdiMzM5OWQ1NmZjMTc3ZTIzZDc0MTc1MzE3NjQ1Njk5YWIwOThmY2EwZGFlMjIyODdkYzlhQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20" class="btn-gold" target="_blank">View Google Calendar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2025 Engineers Without Borders · UMBC Chapter &nbsp;·&nbsp;
+  <a href="https://www.instagram.com/ewb.umbc/" target="_blank">Instagram</a> &nbsp;·&nbsp;
+  <a href="https://discord.gg/cg4sKGC" target="_blank">Discord</a> &nbsp;·&nbsp;
+  <a href="https://www.facebook.com/EWBatUMBC" target="_blank">Facebook</a> &nbsp;·&nbsp;
+  <a href="https://ewb-usa.org/" target="_blank">EWB-USA</a>
+</footer>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const links = document.getElementById('nav-links');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => links.classList.remove('open'));
+  });
+</script>
+
+</body>
+</html>
